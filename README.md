@@ -1,12 +1,12 @@
-[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fleerob%2Fleerob.io)
+[![Deploy with Vercel](https://vercel.com/button)](https://vercel.com/new/clone?repository-url=https%3A%2F%2Fgithub.com%2Fokumaru%2Fprofile-v3)
 
 # okumaru.my.id
 
 Inspired by,
 
-- joshwcomeau.com
-- leerob.io
-- joebell.co.uk
+- [joshwcomeau.com](joshwcomeau.com)
+- [leerob.io](leerob.io)
+- [joebell.co.uk](joebell.co.uk)
 
 ## Tech Stack
 
