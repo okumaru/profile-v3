@@ -1,0 +1,28 @@
+
+/* Normal */
+.Emphasis {
+
+	text-decoration: underline;
+
+}
+
+/* Bold */
+.EmphasisBold {
+
+    display: inline-block;
+    color: #111827;
+    height: 18px;
+
+}
+
+.EmphasisBold::after {
+
+    content: '';
+    display: block;
+    width: 100%;
+    height: 10px;
+    background: rgba(30, 58, 138, 0.3);
+    position: relative;
+    top: -12px;
+
+}

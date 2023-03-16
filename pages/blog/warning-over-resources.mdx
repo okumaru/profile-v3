@@ -1,0 +1,88 @@
+import PostLayout from '@/components/layouts/post-layout'
+
+export const meta = {
+  author: 'Andhika',
+  link: 'warning-over-resources',
+  title: 'Warning Over Resources',
+  slug: 'Peringatan penggunaan resource yang hampir mencapai limitnya.',
+  isPublished: true,
+  publishedOn: 'December 05, 2022',
+  publishedDate: '2022/12/05',
+  category: 'Vercel, Resources, BackEnd'
+}
+
+Ceritanya saya memiliki beberapa informasi penyedia service yang tidak memungut biaya(_tentu dengan limitasi tertentu_),
+salah satunya adalah **Vercel**.
+Sehingga saya bisa _mengerjakan sampai menyerahkan_ project ini benar-benar tidak mengeluarkan biaya apapun.
+Bahkan saya berani memberikan garansi selama 1 tahun untuk project ini.
+
+Jujur untuk project ini tidak menggunakan teknologi yang benar benar dari kemampuanku.
+_Vercel_ dan _NextJS_ baru saja aku pelajari dari web profile ini, sedangkan itu baru belajar kurang dari 1 tahun dari web profile ini selesai di **versi 1.0**.
+Jadinya struktur, design pattern dan lain lain tidak aku hiraukan di project ini (_yang penting Jadi!_).
+
+<ImageBlur 
+  alt="chris-curry" 
+  src="/warning-vercel-over-resource.png" 
+  width="500" 
+  height="500" 
+/>
+
+Satu bulan berlalu setelah project diserah terimakan, saya mendapatkan email penggunaan **over resource** yang dikirimkan oleh vercel. Dari sini saya mulai kawatir sampai muncul beberapa pertanyaan, dan 3 pertanyaan yang benar benar selalu di pikiran,
+
+1. kenapa bisa over resource?
+2. optimasi code yang perlu dilakukan sampai mana?
+3. apa perlu dilakukan pembayaran saja? biar limitasinya bisa naik lagi.
+
+Yang pertama saya lakukan adalah check penggunaan resource di akunku (_karena akun untuk project ini aku jadikan satu dengan akunku di vercel_).
+
+<ImageBlur 
+  alt="chris-curry" 
+  src="/graph-resource.png" 
+  width="500" 
+  height="500" 
+/>
+
+Semakin hari semakin naik penggunaan resource web app ini.
+Dan semakin terpikir untuk membayar ke vercel untuk menaikkan limit resourcenya.
+Tetapi agar tujuan pertama untuk membangun web app dengan biaya seminimum mungkin,
+Aku coba cari bagian bagian mana yang penggunaan resource ini paling banyak.
+Dan akhirnya ketemu, ada dibagian penggunaan item2 yang terlalu banyak.
+
+<ImageBlur 
+  alt="chris-curry" 
+  src="/usage-resource.png" 
+  width="500" 
+  height="500" 
+/>
+
+Akhirnya aku bisa sesuaikan code code yang perlu di optimasi.
+Untuk waktu optimasi ini memang tidak perlu memakan banyak waktu.
+Jika dihitung hitung, mungkin dalam waktu 2-3 hari sudah bisa digunakan lagi.
+Tetapi yang jadi tantangan adalah, _ketelatenan dan ketelitian_.
+Karena untuk project ini benar benar aku mengerjakannya sendiri.
+
+Tentu untuk optimasi yang saya lakukan tidak menggunakan data real yang sedang jalan,
+Atau bisa disebut _Operational data_ atau _Online Transactional Processing_ (OLTP).
+Tetapi saya menggunakan database yang terpisah dan satu platfrom dari database service yang digunakan di project ini.
+
+<ImageBlur 
+  alt="chris-curry" 
+  src="/vercel-prod-preview.png" 
+  width="500" 
+  height="500" 
+/>
+
+Setelah development di local selesai dan di-push-lah ke branch development.
+Dan untungnya di vercel menyediakan preview mode, sehingga aku bisa memastikan web app berjalan sebelum di set ke master/production.
+
+<ImageBlur 
+  alt="chris-curry" 
+  src="/vercel-execute-time.png" 
+  width="500" 
+  height="500" 
+/>
+
+Karena sudah aku pastikan web app berjalan dengan normal di preview mode, dan aku lakukan deploy ke production.
+Untuk saat ini terlihat penggunaan resource sudah mulai menurun.
+
+export default ({ children }) => <PostLayout meta={meta}>{children}</PostLayout>

@@ -1,0 +1,31 @@
+.OrderedList {
+    margin-bottom: 1.25rem;
+}
+
+.OrderedList li {
+
+	counter-increment: counts 1;
+    -webkit-box-align: baseline;
+    align-items: baseline;
+
+}
+
+.OrderedList li:before {
+
+	/* content: "■"; padding-right:7px; */
+	content: counters(counts, ".") ". ";
+    font-feature-settings: "tnum";
+    padding-right: 12px;
+
+}
+
+li.UnorderedList{
+    list-style-position: inside;
+    list-style-type: circle;
+}
+
+.UnorderedList ul {
+    padding-left: 15px;
+    margin: 10px 0px;
+    list-style-type: square;
+}

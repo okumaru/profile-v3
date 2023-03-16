@@ -1,0 +1,29 @@
+import BaseLayout from '@/components/layouts/base-layout'
+
+export const meta = {}
+
+<LinkHeader 
+  href="blog/warning-over-resources"
+  slug="Peringatan penggunaan resource yang hampir mencapai limitnya."
+  publishedOn="December 05, 2022"
+>Warning Over Resources</LinkHeader>
+
+<LinkHeader 
+  href="blog/documenting-learn-design-patterns"
+  slug="Mendokumentasikan pembelajaran design patterns."
+  publishedOn="November 01, 2022"
+>Documenting Learn Design Patterns</LinkHeader>
+
+<LinkHeader 
+  href="blog/on-leaving"
+  slug="Something's not right, and it have been happen before."
+  publishedOn="October 05, 2022"
+>On Leaving</LinkHeader>
+
+<LinkHeader 
+  href="blog/doing-some-project"
+  slug="Build Application Manufacture request from CV. Garuda Machinery."
+  publishedOn="January 02, 2022"
+>Doing Some Project</LinkHeader>
+
+export default ({ children }) => <BaseLayout meta={meta}>{children}</BaseLayout>

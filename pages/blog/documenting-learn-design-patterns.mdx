@@ -1,0 +1,135 @@
+import PostLayout from '@/components/layouts/post-layout'
+
+export const meta = {
+  author: 'Andhika',
+  link: 'documenting-learn-design-patterns',
+  title: 'Documenting Learn Design Patterns',
+  slug: 'Mendokumentasikan pembelajaran design patterns.',
+  isPublished: true,
+  publishedOn: 'November 01, 2022',
+  publishedDate: '2022/11/01',
+  category: 'Learn, Design Pattern'
+}
+
+<ImageBlur 
+  alt="chris-curry" 
+  src="/chris-curry-UJij-wz7w88-unsplash.jpg" 
+  width="250" 
+  height="250" 
+/>
+
+Minggu terakhir bulan October, 
+saya ingin menyelesaikan praktek implementasi Design Patterns dalam bahasa pemrograman PHP.
+Dalam case skenario yang saya ambil adalah Request ke beberapa API Vendor dengan berbagai tipe produk yang disediakan oleh vendor masing-masing.  
+
+Sebagai contoh, kita memiliki lebih dari 1 product anggap saja 10 product.  
+Agar tidak membingungkan, kita batasi setiap vendor memiliki 5 product.  
+Artinya _5 product_ menggunakan **vendor A** dan _5 product_ lainnya menggunakan **vendor B**.
+Untuk 1 dari 5 product yang menggunakan vendor A atau vendor B memiliki **spesifikasi** atau **type** product masing - masing.
+
+Di sisi lainnya, kita membuka order untuk customer. 
+Untuk 1 customer bisa melakukan order lebih dari 1 product. 
+Sebagai analogi, customer bisa order 1 product (*atau lebih*) yang menggunakan vendor A dan 
+juga 1 product (*atau lebih*) yang menggunakan vendor B.
+Yang artinya,
+
+1. Dalam **1 order** dimiliki *1 customer*. 
+2. Dalam **1 order** memiliki *lebih dari 1 order item*. 
+3. Dalam **1 order item** bisa berupa *1 dari 10 product* yang dijual.
+4. Dalam **1 order item** bisa berupa *salah satu product* yang menggunakan vendor A atau vendor B. 
+
+Untuk proses aktivasi product ke vendor pasti harus sesuai dari data order customer,
+dan menurut saya akan membutuhkan step - step berikut.
+
+1. Mengambil data order yang telah dilakukan oleh customer.
+2. Iterasi order item untuk menentukan product yang dibeli oleh customer. Penentuan tersebut akan menghasilkan, Product yang dibeli dari spesifikasi, type dan vendor yang digunakan.
+3. Dari hasil product spesifikasi dan vendor yang digunakan, membuat antrian perintah untuk aktivasi ke vendor masing - masing.
+4. Dalam setiap antrian melakukan request ke vendor masing - masing.
+
+## Kita sesuaikan menjadi **Design Patterns**.
+
+Pertama mencoba design pattern, client code saya pikir hanya ada di controller dan sejenisnya. 
+Setelah mencoba menggabungkan beberapa design patterns, ternyata client code bisa masuk ke dalam design pattern juga. 
+(Design pattern memiliki design pattern lagi).
+
+#### Get data order.
+Untuk step no. 1, pasti disini akan membutuhkan Model (*optional repository*).
+Dan untuk step ini tidak saya dalami, karena menurut saya sangat dasar sekali dan tidak membutuhakn design pattern.
+
+#### Iterasi & identify data order items.
+Dari step ini sampai selanjutnya pasti membutuhkan design patterns.
+Step no. 2, ini dibutuhkan untuk melakukan identifikasi product apa yang dibeli, 
+type product apa yang dibeli dan vendor yang ditentukan untuk product tersebut.
+Kenapa type product perlu dilakukan pengecekan, karena 1 vendor bisa memiliki lebih dari 1 type product.
+
+Untuk step ini saya menggunakan **Chain of Responsibility (CoR)**.  
+Sebab dalam design pattern CoR bisa melakukan iterasi suatu group of object
+dan juga melakukan pengecekan saat melakukan iterasi tersebut.
+
+Hal ini untuk memudahkan ketika menambahkan type product/spesifikasi product/vendor baru.
+Penambahan code cukup berada di bagian tertentu sesuai dengan fungsinya.
+
+#### Identify specification of product of order item.
+Di step sebelumnya hanya dilakukan pengecekan type product dan vendor yang akan digunakan.
+Tetapi untuk step no. 3 ini untuk melakukan pengecekan kusus *spesifikasi product* yang akan digunakan.  
+
+Untuk step ini saya menggunakan design pattern **Builder**.
+Struktur data product satu dengan lainnya pastinya sama,
+oleh karena itu dari struktur data yang sama dibuatlah request parameter yang berbeda beda untuk setiap product ke vendor masing - masing.
+
+Design pattern ini akan memudahkan ketika ada spesifikasi product baru yang akan dijual.
+Bahkan anda bisa membuat spesifikasi product yang custom di design pattern **Builder**.
+
+#### Set in data to bundle request.
+Step no. 4 adalah untuk menggabungkan request yang akan dilakukan ke vendor menjadi 1 bundle proses.
+Karena dalam 1 order bisa memiliki lebih dari 1 order item, maka tidak layak jika dilakukan request 1 per 1 jika order item ada banyak. 
+
+Untuk design pattern yang digunakan adalah **Command**, 
+Design pattern ini menurut saya sesuai digunakan, karena pada dasarnya request ke 3rd party (*vendor*)
+tidak tentu hanya request saja, bisa dilakukan queueing atau pencatatan request ke vendor dari request ke vendor sampai response dari vendor atau bahkan yang lainnya.
+
+Hal ini akan memudahkan ketika ada type request baru ke vendor.
+Sehingga hanya perlu menambahkan command baru di design patter ini, 
+dan command tersebut bisa digunakan berkali kali di client code.
+
+#### Execute request to vendor.
+Step ini pasti adalah step terakhir untuk proses aktivasi product ke vendor.
+Untuk step ini saya menggunakan **Adapter** sebagai design pattern.
+Design pattern ini sangat sesuai untuk menghubungkan aplikasi kita dengan aplikasi 3rd party (*vendor*).
+Karena kita memiliki lebih dari 1 vendor, dan pastinya cara untuk komunikasi dengan vendor satu dengan lain akan berbeda.
+
+Design pattern ini memudahkan ketika kita menambahkan 3rd party (*vendor*) baru ke aplikasi.
+Tinggal clone class dan sesuaikan cara request ke vendor baru tersebut.
+
+### Sebagai kesimpulan
+design patterns yang akan digunakan adalah:
+
+1. CoR (Chain of Responsibility), check [dokumentasi](https://refactoring.guru/design-patterns/chain-of-responsibility).
+2. Builder, check [dokumentasi](https://refactoring.guru/design-patterns/builder).
+3. Adapter, check [dokumentasi](https://refactoring.guru/design-patterns/adapter).
+4. Command, check [dokumentasi](https://refactoring.guru/design-patterns/command).
+
+Step saya untuk mengimplementasikan design pattern ke code PHP.
+Yang pertama saya buat adalah **Command** untuk membuat bundle request dari order item yang dibeli customer.
+Selanjutnya membuat **Builder** untuk menspesifikasikan cara request ke vendor.
+Selanjutnya **Adapter** untuk request ke vendor masing - masing. 
+Dan yang terakhir adalah **CoR (Chain of Responsibility)**, 
+step ini merupakan kunci penting dalam step selanjutnya,
+karena step ini akan melakukan identifikasi class atau fungsi apa saja yang akan digunakan di **Command**, **Builder** dan **Adapter**.
+
+Dari rangkaian design patterns tersebut, injection yang saya lakukan adalah.
+
+1. Command dimasukkan Adapter.
+2. Adapter dimasukkan Builder.
+
+Untuk **CoR (Chain of Responsibility)**, 
+tidak melakukan injection kemanapun karena difungsikan untuk identifikasi order item,
+dan hanya menentukan apa yang akan digunakan untuk **Command**, **Adapter** dan **Builder**.
+
+I don't share the code! But i hope this will help you to understand design patterns.
+
+Saya yakin pasti ada ide lain atau pertanyaan yang ingin disampaikan,
+Karena saya sendiri belum expert di dalam design patterns.
+Dan saya sangat terbuka sekali untuk diskusi :).
+
+export default ({ children }) => <PostLayout meta={meta}>{children}</PostLayout>
