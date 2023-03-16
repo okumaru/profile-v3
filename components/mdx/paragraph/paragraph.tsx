@@ -1,8 +1,8 @@
 import type Props from "../interface-props";
-import style from "./Paragraph.module.css";
+import style from "./paragraph.module.css";
 
 export const Paragraph = ({ children }: Props) => (
   <>
-    <p className={style.textParagraph}>{children}</p>
+    <p className="mb-5 leading-relaxed">{children}</p>
   </>
 );
