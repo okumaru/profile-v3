@@ -1,4 +1,5 @@
 import React, { ReactNode } from "react";
+import Head from 'next/head'
 import Header from "../headers/header";
 import Nav from "../headers/nav";
 import Footer from "../footers/footer";
@@ -10,6 +11,9 @@ interface Props {
 
 export default function LpLayout({ children }: Props) {
   return <div className="max-w-3xl m-4 md:mx-auto lg:my-8">
+    <Head>
+      <title>{process.env.PAGE_NAME ?? 'Okumaru'}</title>
+    </Head>
     <div className="flex flex-col justify-end sm:flex-row gap-y-3 py-5 mb-4 lg:mb-8">
       <Nav />
     </div>
