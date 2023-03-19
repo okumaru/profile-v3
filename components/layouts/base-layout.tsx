@@ -14,7 +14,7 @@ interface Props {
 export default function BaseLayout({ meta, children }: Props) {
   return <div className="max-w-3xl m-4 md:mx-auto lg:my-8">
     <Head>
-      <title>{process.env.PAGE_NAME ?? 'Okumaru'} - {meta.title}</title>
+      <title>{`${(process.env.PAGE_NAME ?? 'Okumaru')} - ${meta.title}`}</title>
       <meta property="og:title" content={meta.title} key="title" />
     </Head>
     <Header />
