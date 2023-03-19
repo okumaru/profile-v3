@@ -1,3 +1,11 @@
+import React, { ReactNode } from "react";
+import Link from 'next/link'
+
+interface PropLink {
+  href?: string;
+  children?: ReactNode
+}
+
 interface Prop {
   href: string;
   slug?: string;
@@ -5,17 +13,19 @@ interface Prop {
   children: string;
 }
 
-export const Link = ({ href, children }: Prop) => <a href={href}>{children}</a>;
+export const LinkDefault = ({href, children }: PropLink) => (
+  <Link href={href ?? '#'}>{children}</Link>
+);
 
 export const LinkHeader = ({ href, slug, publishedOn, children }: Prop) => (
   <>
-    <a
+    <Link
       href={href}
       className="group mt-10 flex gap-1 items-center cursor-pointer"
     >
       <span className="text-gray-700 group-hover:text-gray-400 text-lg no-underline">#</span>
       <span className="text-xl font-semibold underline">{children}</span>
-    </a>
+    </Link>
     
     {slug && <p className="text-base p-summary text-neutral-400">{slug}</p>}
     
