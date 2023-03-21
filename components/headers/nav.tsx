@@ -2,7 +2,7 @@ import {useState, useEffect} from "react";
 import Link from 'next/link'
 import { useTheme } from "next-themes";
 
-const renderThemeChanger= () => {
+const RenderThemeChanger= () => {
 
   const {systemTheme , theme, setTheme} = useTheme ();
   const [mounted, setMounted] = useState(false);
@@ -33,7 +33,7 @@ const renderThemeChanger= () => {
 
 export default function Nav () {
   return <div className="flex gap-4">
-    {renderThemeChanger()}
+    {RenderThemeChanger()}
     <Link href="/about" className='font-medium hover:underline underline-offset-2'>
       About
     </Link>
