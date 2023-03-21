@@ -1,5 +1,6 @@
 import '@/styles/globals.css'
 import type { AppProps } from 'next/app'
+import { ThemeProvider } from "next-themes"
 import { MDXProvider } from '@mdx-js/react'
 import * as MdxComponent from '@/components/mdx/mdx-components'
 import { LinkHeader } from '@/components/mdx/mdx-components'
@@ -34,8 +35,10 @@ const components = {
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
-    <MDXProvider components={components}>
-      <Component {...pageProps} />
-    </MDXProvider>
+    <ThemeProvider enableSystem={true} attribute="class">
+      <MDXProvider components={components}>
+        <Component {...pageProps} />
+      </MDXProvider>
+    </ThemeProvider>
   )
 }

@@ -27,7 +27,7 @@ export const LinkHeader = ({ href, slug, publishedOn, children }: Prop) => (
       <span className="text-xl font-semibold underline">{children}</span>
     </Link>
     
-    {slug && <p className="text-base p-summary text-neutral-400">{slug}</p>}
+    {slug && <p className="text-base p-summary text-neutral-500">{slug}</p>}
     
     {publishedOn && <div className="flex gap-2 items-center mt-2">
       <svg className="w-5 h-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor">
