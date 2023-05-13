@@ -11,14 +11,76 @@ export const meta = {
   category: 'Vercel, Resources, BackEnd'
 }
 
-Ceritanya saya memiliki beberapa informasi penyedia service yang tidak memungut biaya(_tentu dengan limitasi tertentu_),
-salah satunya adalah **Vercel**.
-Sehingga saya bisa _mengerjakan sampai menyerahkan_ project ini benar-benar tidak mengeluarkan biaya apapun.
-Bahkan saya berani memberikan garansi selama 1 tahun untuk project ini.
+Currently Vercel is the most platfrom I like to publish my web apps.
+Why? because I like to use NextJs and it's easy to deploy to production.
+There so much tool I can use to improve my experience on development or deployment.
 
-Jujur untuk project ini tidak menggunakan teknologi yang benar benar dari kemampuanku.
-_Vercel_ dan _NextJS_ baru saja aku pelajari dari web profile ini, sedangkan itu baru belajar kurang dari 1 tahun dari web profile ini selesai di **versi 1.0**.
-Jadinya struktur, design pattern dan lain lain tidak aku hiraukan di project ini (_yang penting Jadi!_).
+# Not a right way
+
+My first time I use NextJs is for this website, my own website portfolio.
+At that time I want to learn something new, 
+I felt like I'm bored to code some modules of some platform and at that time I use programming language PHP.
+It's doesn't mean I don't like PHP, 
+at that time it's just like I don't know how to use PHP the right ways
+and I don't know how powerful Laravel framework to build web application.
+
+I didn't blame enyone why my application got over resources, 
+otherwise I think because I develop application the wrong way.
+For your information, after I got little experience how to use NextJs and Vercel.
+I felt like I'm ready to develop custom application use NextJs and deploy to production use Vercel.
+
+Coincidentally Company where my wife work need some application.
+They want manufacturing application to improve operational in Company.
+I think the management of Company already looking some vendor who already build application with same criteria as they need.
+And my wife say, the price of application is too hight and management doesn't have budget that much.
+
+At that time I didn't have any relationship with software house or solo developer who can handle to build her Company need.
+And I think for one or two days to negotiate with my wife. 
+So much obsession at that time, 
+because it's something new to me and I really want to gain some new experience.
+Luckily my proposal to my wife Company is accepted. 
+
+On proposal I will develop application for 3 months, but in reality I develop application in 10 months.
+There so much thing new to me, the biggest problem is "How to spare my time for double job".
+Actually if you already married and already worked, you'll have 2 responsibility.
+Responsibility to family and responsibility to company, but if you double job you'll add new responsibility.
+I didn't say, "Side Hustle" is bad to us but it's just hard to maintain a time and energy.
+
+# Process to develop
+
+For your information, I use NextJs, Vercel, Supabase and SWR in this project.
+In process development it's felt like some godlike tools, 
+it's like very easy to develop application with just for CRUD function.
+
+For using NextJs I can use bunch of library of reactJs. 
+Vercel manage my application with transparent resource usage and easy deploy to staging / production environment.
+Supabase with JS library for connecting database storage and file storage of application.
+SWR for reactJs hook to data fetching and it magical, after data updated in other side data will be updated in my side with out reload the page.
+
+Every process development working smoothly, of course because I can consult the detail function the Company needed with out I going to client office.
+I doing this side project on 6 AM until 7 AM, after that I working for my office until 5 PM.
+After working for my office, I continue to code on side project application from 6 PM until 10 PM or 11 PM. 
+And mostly on weekend I still code for this side project, 
+of course sometime in weekend I do not code on this side project, because I must spend my time with my family too.
+
+At that time, I want to make complicated code to handle so much condition with fast response.
+Because I think my wife Company will be not use data until **thousands or millions record**.
+And I think library of Supabase will fetch all of data in table with fast response.
+So I build application with much of logic in frontend, in backend I will just use library of Supabase.
+And thankfully process hand over application finished in 10 months after project started.
+
+# Guarantee of application
+
+Because I use Supabase file storage for media in this application, and Supabase have limitation for free plan.
+I worried with Supabase file storage space will be running out, and I cannot use free plan for supabase.
+First month after hand over application to my wife Company application working well.
+But what I was worried was different in reality, in supabase doesn't show any warning or alert.
+
+In reality, Company use millions records of data.
+And it make me realize, library of supabase limiting fetch data to 1000 records.
+It's make me need to change how to fetch data from limited 1000 records to all records.
+And what happen is, Vercel detected big execute time, bandwidth in API of NextJs.
+And they send me email about "Usage Limit Warning".
 
 <ImageBlur 
   alt="chris-curry" 
@@ -27,53 +89,12 @@ Jadinya struktur, design pattern dan lain lain tidak aku hiraukan di project ini
   height="500" 
 />
 
-Satu bulan berlalu setelah project diserah terimakan, saya mendapatkan email penggunaan **over resource** yang dikirimkan oleh vercel. Dari sini saya mulai kawatir sampai muncul beberapa pertanyaan, dan 3 pertanyaan yang benar benar selalu di pikiran,
-
-1. kenapa bisa over resource?
-2. optimasi code yang perlu dilakukan sampai mana?
-3. apa perlu dilakukan pembayaran saja? biar limitasinya bisa naik lagi.
-
-Yang pertama saya lakukan adalah check penggunaan resource di akunku (_karena akun untuk project ini aku jadikan satu dengan akunku di vercel_).
-
 <ImageBlur 
   alt="chris-curry" 
   src="/graph-resource.png" 
   width="500" 
   height="500" 
 />
-
-Semakin hari semakin naik penggunaan resource web app ini.
-Dan semakin terpikir untuk membayar ke vercel untuk menaikkan limit resourcenya.
-Tetapi agar tujuan pertama untuk membangun web app dengan biaya seminimum mungkin,
-Aku coba cari bagian bagian mana yang penggunaan resource ini paling banyak.
-Dan akhirnya ketemu, ada dibagian penggunaan item2 yang terlalu banyak.
-
-<ImageBlur 
-  alt="chris-curry" 
-  src="/usage-resource.png" 
-  width="500" 
-  height="500" 
-/>
-
-Akhirnya aku bisa sesuaikan code code yang perlu di optimasi.
-Untuk waktu optimasi ini memang tidak perlu memakan banyak waktu.
-Jika dihitung hitung, mungkin dalam waktu 2-3 hari sudah bisa digunakan lagi.
-Tetapi yang jadi tantangan adalah, _ketelatenan dan ketelitian_.
-Karena untuk project ini benar benar aku mengerjakannya sendiri.
-
-Tentu untuk optimasi yang saya lakukan tidak menggunakan data real yang sedang jalan,
-Atau bisa disebut _Operational data_ atau _Online Transactional Processing_ (OLTP).
-Tetapi saya menggunakan database yang terpisah dan satu platfrom dari database service yang digunakan di project ini.
-
-<ImageBlur 
-  alt="chris-curry" 
-  src="/vercel-prod-preview.png" 
-  width="500" 
-  height="500" 
-/>
-
-Setelah development di local selesai dan di-push-lah ke branch development.
-Dan untungnya di vercel menyediakan preview mode, sehingga aku bisa memastikan web app berjalan sebelum di set ke master/production.
 
 <ImageBlur 
   alt="chris-curry" 
@@ -82,7 +103,24 @@ Dan untungnya di vercel menyediakan preview mode, sehingga aku bisa memastikan w
   height="500" 
 />
 
-Karena sudah aku pastikan web app berjalan dengan normal di preview mode, dan aku lakukan deploy ke production.
-Untuk saat ini terlihat penggunaan resource sudah mulai menurun.
+# Temporary solution
+
+Honestly I don't have any budget for upgrading to Vercel paid membership.
+So I move application from Vercel to VPS in Indonesia, I have VPS cheapest and luckily application can running in this VPS.
+And I make announcement to the Company to move application to other domain, so they can access application to VPS.
+
+Of course there some issue after moving application to server in Indonesia.
+Application more slower, and sometime not accessible.
+To solve the problem I decided to use CDN and problem application slow is solved.
+
+# Permanent solution
+
+My top priority is to refactoring fetch data because on current situation fetch data will return all records of data. 
+I'll change fetch data to paging algorithm and searchable data.
+I'll refactoring how to use SWR, it's look like I didn't use SWR and API the right way.
+Because logic of paging and search I put to SWR only, I do not put to API.
+
+I hope refactoring code will be working well. 
+So I can share to anyone about this little experience next time.
 
 export default ({ children }) => <PostLayout meta={meta}>{children}</PostLayout>
