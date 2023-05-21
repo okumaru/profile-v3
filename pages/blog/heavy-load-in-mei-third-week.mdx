@@ -1,0 +1,140 @@
+import PostLayout from '@/components/layouts/post-layout'
+
+export const meta = {
+  author: 'Andhika',
+  link: 'heavy-load-in-mei-third-week',
+  title: 'Heavy Load in Mei Third Week',
+  slug: 'Feeling tired after heavy load in weekday in mei third week.',
+  isPublished: true,
+  publishedOn: 'Mei 21, 2023',
+  publishedDate: '2023/05/21',
+  category: 'Hardwork'
+}
+
+Everyone have their goal, neither me or you.
+And, okay this week is feel so heavy to me, 
+so much question and task that I got and luckily I can answer and finish the task on time. 
+But there still one task from office that I not yet finish,
+because miss information and not running service make me handle another task. 
+
+In this week (3rd week of Mei), I do working for 4 main task.
+
+1. Task from office.
+2. My older sister in law want to have website for promote her work.
+3. Plan to research accessibility database related with page load time.
+4. Learning about SEO for my current website.
+5. Learning meta API for instagram.
+
+<br/>
+Here the story line,  
+I think activity for "Learning meta API for instagram" I'll write to another post.
+
+# Task From Office.
+
+In this era, you will have a lot of coworker with provision are developer, 
+backend developer, frontend developer, software engineer, quality assurance and much more.
+As you can know, coder/developer need do code to make some application so they will make base code with their knowledge.
+
+So what happen if new developer with more experience contribute to project?
+I don't know, your answer will be same as me or not.
+Because I like the code is readable, here my answer and what I did.
+because it's happen to me in this past week. 
+
+## What I think.
+
+- If I repair the code to make it look like more perfect, How much of change I will be made?
+- How much of time I will need to make it happen?
+- How I can make sure the code will be not effected with result of function?
+- If it effected, Is it existing function will be working well? 
+
+<br/>
+And of course after my effort to make code more perfect, I will begging for my merge request will approved
+<ImageBlur 
+  alt="begging-for-approval" 
+  src="/r_2880659_Vum14.jpg" 
+  width="500" 
+  height="500" 
+/>
+
+## What I did.
+
+I do change the code or file of code as I expected just for code that related to the task I working on.
+And any other file of code will be requested in another time. 
+I think it's not worth it if I do change all the code as I expected if it'll be error and consume much of time.
+
+It's doesn't mean the application or the code is not worth it, it's just make the code more beautiful.
+Client just need the application, if the application working they will happy.
+Application just need code, if code working well application will be working well.
+
+# Website For My Older Sistem
+
+I like to write code, but I'm not good enought and not have much experience with UX.
+So I keep looking website with good UX and learning from them.
+I just starting create website use NextJs, 
+because I need more speed to publish the website and have more experience more than any other JS framework.
+
+I use default layout of NextJs, because it'll be only one page in this website.
+And I just need more information to put in her website.
+
+<ImageBlur 
+  alt="begging-for-approval" 
+  src="/Example-landingpage.jpg" 
+  width="228" 
+  height="511" 
+/>
+
+Honestly she wasn't give me much information, 
+she just give me example of other website she was know.
+Because I need more information,
+I was asking many thing to her to make sure the output and expectation of the website for her.
+So right now I was just imaginating how the website will be.
+and I hope after the website finished she will be happy for the result of website.
+
+# Researching Page Load time 
+
+So last week I do change the method to fetch data of some application.
+Before I tell the problem, I'll explain the basic function.
+I use NextJs and SWR for data fetching, and in current fetch function on API.
+I was amazed how to use data for paging, searching, sorting if I use SWR.
+What I amazed are,
+
+- Data fetched in real time, so after I edit data in other page, opened page with same data not need to reload the page to see the edited data.
+- Sorting and searching data does not need request to API.
+
+<br/>
+The problem are,
+
+- After we have a lot data, API need more time to response a request from SWR.
+- Response data too big and I got warning from NextJs, but currently application still can be use.
+- Execution time too big too, so I need migrate hosting to hosting with more bigger execution time limit.
+
+<br/>
+So to fix that problem, I change method use data in application from use SWR to request API.
+API have limitation data to response, so request must be not too long.
+
+After I deploy the change to production, 
+the client feeling every load page, sorting, search data they will be need less than 3 second to got the result.
+They feeling unheppy with that, but I explain If use previous method and data have more bigger that this, 
+response from API will be need more time too in first time request. Maybe it'll be need more than 5 second.
+
+I have 2 plan for this problem,
+
+1. Change server database to local server of hosting.
+2. Change method how to use SWR and API again.
+
+<br/>
+But no. 2 will be hard or maybe imposible, let's just try it.
+
+# Learning SEO
+
+I was just know what SEO is, but I don't know how to make good SEO for website.
+I was know google webmaster, and google change the name to google search console I think.
+I dont know much about it, and I will try learn it if I have time only :)
+
+# Learning Meta API
+
+Actually I want to learn this API because I want to add instagram API to my older sister website.
+Because she was active use instagram to promote her self.
+I'll make another post for this learning not in this post, so please be patient.
+
+export default ({ children }) => <PostLayout meta={meta}>{children}</PostLayout>
