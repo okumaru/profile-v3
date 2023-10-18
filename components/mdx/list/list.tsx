@@ -1,20 +1,16 @@
 // import type Props from "../interface-props";
 // import style from './List.module.css'
-import React, { ReactNode } from "react";
+import React, { ReactNode } from 'react';
 
 export default interface Props {
-  children?: ReactNode
+  children?: ReactNode;
   // any props that come into the component
 }
 
 export const OrderedList = ({ children }: Props) => (
-  <ol className="list-decimal list-inside">
-    {children}
-  </ol>
-)
+  <ol className="list-decimal list-inside mb-5">{children}</ol>
+);
 
 export const UnorderedList = ({ children }: Props) => (
-  <ul className="list-disc list-inside">
-    {children}
-  </ul>
-)
+  <ul className="list-disc list-inside mb-5">{children}</ul>
+);

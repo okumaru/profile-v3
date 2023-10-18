@@ -1,11 +1,11 @@
-import '@/styles/globals.css'
-import type { AppProps } from 'next/app'
-import { ThemeProvider } from "next-themes"
-import { MDXProvider } from '@mdx-js/react'
-import * as MdxComponent from '@/components/mdx/mdx-components'
-import { LinkHeader } from '@/components/mdx/mdx-components'
-import ImageBlur from '@/components/mdx/image/image-blur'
-import ImageBlurGray from '@/components/mdx/image/image-blur-gray'
+import '@/styles/globals.css';
+import type { AppProps } from 'next/app';
+import { ThemeProvider } from 'next-themes';
+import { MDXProvider } from '@mdx-js/react';
+import * as MdxComponent from '@/components/mdx/mdx-components';
+import { LinkHeader } from '@/components/mdx/mdx-components';
+import ImageBlur from '@/components/mdx/image/image-blur';
+import ImageBlurGray from '@/components/mdx/image/image-blur-gray';
 
 const components = {
   // img: ,
@@ -31,7 +31,7 @@ const components = {
   LinkHeader,
   ImageBlur,
   ImageBlurGray,
-}
+};
 
 export default function App({ Component, pageProps }: AppProps) {
   return (
@@ -40,5 +40,5 @@ export default function App({ Component, pageProps }: AppProps) {
         <Component {...pageProps} />
       </MDXProvider>
     </ThemeProvider>
-  )
+  );
 }

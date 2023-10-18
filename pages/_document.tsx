@@ -1,6 +1,6 @@
-import { Html, Head, Main, NextScript } from 'next/document'
-import Script from 'next/script'
-import CookieAlert from "../components/cookies-alert"
+import { Html, Head, Main, NextScript } from 'next/document';
+import Script from 'next/script';
+import CookieAlert from '../components/cookies-alert';
 
 export default function Document() {
   return (
@@ -21,7 +21,7 @@ export default function Document() {
             gtag('config', '${process.env.G_TAG_ID}');
           `}
         </Script>
-        <Script id="cookies-alert" strategy="afterInteractive">
+        {/* <Script id="cookies-alert" strategy="afterInteractive">
           {`
 
             const cookiesAlertBtn = document.getElementById('cookies-alert-btn');
@@ -40,13 +40,13 @@ export default function Document() {
             });
 
           `}
-        </Script>
+        </Script> */}
       </Head>
-      <body className='relative'>
+      <body className="relative">
         <Main />
         <NextScript />
-        <CookieAlert />
+        {/* <CookieAlert /> */}
       </body>
     </Html>
-  )
+  );
 }
