@@ -39,7 +39,7 @@ export default function App({ Component, pageProps }: AppProps) {
     <ThemeProvider enableSystem={true} attribute="class">
       <MDXProvider components={components}>
         <Component {...pageProps} />
-        {process.env.ENABLE_ANALYTIC && <Analytics />}
+        <Analytics />
       </MDXProvider>
     </ThemeProvider>
   );

@@ -6,51 +6,24 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        {process.env.G_TAG_ID && (
-          <>
-            <Script
-              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.G_TAG_ID}`}
-              strategy="afterInteractive"
-            />
-            <Script id="google-analytics" strategy="afterInteractive">
-              {`
-                window.dataLayer = window.dataLayer || [];
-                function gtag(){
-                  window.dataLayer.push(arguments)
-                }
-
-                gtag('js', new Date());
-                gtag('config', '${process.env.G_TAG_ID}');
-              `}
-            </Script>
-          </>
-        )}
-
-        {/* <Script id="cookies-alert" strategy="afterInteractive">
+        <Script
+          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.G_TAG_ID}`}
+          strategy="afterInteractive"
+        />
+        <Script id="google-analytics" strategy="afterInteractive">
           {`
-
-            const cookiesAlertBtn = document.getElementById('cookies-alert-btn');
-            const cookiesAlertSection = document.getElementById("cookies-alert");
-
-            const hideCookiesAlert = () => {
-              cookiesAlertSection.style.display = 'none';
+            window.dataLayer = window.dataLayer || [];
+            function gtag(){
+              window.dataLayer.push(arguments)
             }
-
-            setTimeout(() => {
-              hideCookiesAlert();
-            }, 15000);
-
-            cookiesAlertBtn.addEventListener('click', () => {
-              hideCookiesAlert();
-            });
-
+            gtag('js', new Date());
+            gtag('config', '${process.env.G_TAG_ID}');
           `}
-        </Script> */}
+        </Script>
       </Head>
       <body className="relative">
         <Main />
         <NextScript />
-        {/* <CookieAlert /> */}
       </body>
     </Html>
   );
