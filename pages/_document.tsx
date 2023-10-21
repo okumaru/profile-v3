@@ -6,21 +6,26 @@ export default function Document() {
   return (
     <Html lang="en">
       <Head>
-        <Script
-          src={`https://www.googletagmanager.com/gtag/js?id=${process.env.G_TAG_ID}`}
-          strategy="afterInteractive"
-        />
-        <Script id="google-analytics" strategy="afterInteractive">
-          {`
-            window.dataLayer = window.dataLayer || [];
-            function gtag(){
-              window.dataLayer.push(arguments)
-            }
+        {process.env.G_TAG_ID && (
+          <>
+            <Script
+              src={`https://www.googletagmanager.com/gtag/js?id=${process.env.G_TAG_ID}`}
+              strategy="afterInteractive"
+            />
+            <Script id="google-analytics" strategy="afterInteractive">
+              {`
+                window.dataLayer = window.dataLayer || [];
+                function gtag(){
+                  window.dataLayer.push(arguments)
+                }
 
-            gtag('js', new Date());
-            gtag('config', '${process.env.G_TAG_ID}');
-          `}
-        </Script>
+                gtag('js', new Date());
+                gtag('config', '${process.env.G_TAG_ID}');
+              `}
+            </Script>
+          </>
+        )}
+
         {/* <Script id="cookies-alert" strategy="afterInteractive">
           {`
 
