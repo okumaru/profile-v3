@@ -1,0 +1,114 @@
+import PostLayout from '@/components/layouts/post-layout';
+
+export const meta = {
+  author: 'Andhika',
+  link: 'unanswered-question-about-transaction',
+  title: 'Unanswered Question About Transaction',
+  slug: 'Theres still a lot to learn.',
+  isPublished: true,
+  publishedOn: 'November 30, 2023',
+  publishedDate: '2023/11/30',
+  category: 'Learn',
+};
+
+<ImageBlur
+  alt="learns-glenn-carstens-peters-unsplash"
+  src="/learns-glenn-carstens-peters-unsplash.jpg"
+  width="450"
+  height="450"
+/>
+
+Sedikit cerita ketika develop project budgeting.
+
+Di aplikasi API aku coba terapkan rollback transaksi,
+dimana fungsinya ketika memiliki beberapa transaksi ke database,
+dan salah satu transaksi mengalami kegagalan, semua transaksi tersebut tidak akan digagalkan(rollback)
+
+Setau saya fitur sudah include di berbagai library yang digunakan untuk mengelola database.
+Tetapi saya tidak tau apakah fitur ini sudah banyak diterapkan di berbagai macam aplikasi?
+Sebagai informasi, saya juga baru menerapkan rollback transaksi ini di project ini.
+
+Ceritanya library yang saya gunakan adalah SQlX yang ditulis menggunakan bahasa pemrograman Rust.
+Disana sudah saya terapkan penggunakan rollback transaksi jika bundle transaksi mengalami kegagalan.
+Tetapi cara menerapkannya sesuai dokumentasi & informasi dari forum forum berikut.
+Intinya saya masih belum yakin dengan cara menerapkan rollback transaksi ini dalam bahasa pemrograman Rust.
+
+Pada pokok pembahasan ini,
+Salah satu API menyediakan fungsi delete sebuah data "account".
+Fungsinya sederhana,
+
+1. Request dikirimkan oleh client dengan mengirimkan ID account.
+2. Request diterima API.
+3. API mengambil data account berdasarkan ID account di database.
+4. API menghapus data account berdasarkan ID account di database.
+5. API meresponse data account yang telah di hapus berdasarkan ID account.
+6. client mendapatkan data account yang telah di hapus berdasarkan ID account.
+
+Karena belum pernah menggunakan rollback transaksi,
+Saya belum yakin, apakah fungsinya sudah betul atau belum, tetapi itu yang sudah saya terapkan.
+Untuk test fungsi API ini, saya menggunakan postman & insomnia.
+Ketika saya test menggunakan API client tersebut, fungsi berjalan dengan normal seperti di atas.
+
+Setelah itu saya fokus untuk mempelajari aplikasi mobile menggunakan bahasa pemrograman Kotlin.
+Di aplikasi mobile, saya terapkan request delete account ke API yang telah saya terapkan rollback transaksi.
+Disana saya menemukan, request delete account dari mobile gagal dilakukan.
+Tetapi ketika request delete account dari API client berhasil dilakukan.
+
+<ImageBlur
+  alt="mobile-delete-account"
+  src="/mobile-delete-account.jpg"
+  width="250"
+  height="250"
+/>
+
+Oleh karena itu saya coba cari tau kenapa delete account gagal dilakukan ketika request dilakukan di mobile?
+Debug di mobile yang saya lakukan adalah
+
+1. memastikan request dilakukan ke API.
+2. memastikan endpoint sudah betul mengarah ke API yang sudah saya buat.
+3. memastikan parameter yang dikirimkan juga sudah sesuai.
+   Dan dari hasil debug tersebut tidak menemukan kesalahan & semuanya sudah betul.
+
+Akhirnya baru saya cari log yang ada di API, dan log tersebut tertulisakan seperti berikut.
+
+`thread 'tokio-runtime-worker' panicked at 'called `Result::unwrap()`on an`Err` value: RowNotFound', src/repositories/accounts.rs:172:14`
+
+Isi script dari file & line dari log tersebut seperti berikut,
+
+<br />
+
+```
+pub fn query_detail_account<'a>(
+    db: &'a mut impl Executor,
+    id: i32
+) -> BoxFuture<'a, ExistAccount> {
+    async move {
+        let mut query = sqlx::QueryBuilder::new(r#"SELECT * FROM tblaccounts WHERE id = "#);
+
+        let accounts = query
+            .push_bind(id)
+            .build_query_as::<ExistAccount>()
+            .fetch_one(db.as_executor())
+            .await
+            .unwrap();
+
+        accounts
+    }
+    .boxed()
+}
+```
+
+<br />
+
+Tetapi saya coba cek di database, data dengan account id yang dikirimkan oleh mobile sudah betul.
+Dari situ saya menyimpulkan, ada kemungkinan fungsi rollback transaksi berhasil dilakukan.
+Karena sebelum melakukan transaksi menghapus data dari database, API melakukan transaksi dengan mengambil data dari database.
+Tetapi anehnya kenapa rollback transaksi baru bisa digunakan ketika request dikirimkan menggunakan mobile?
+
+Untuk menjawab pertanyaan tersebut mengkin akan saya cari jawabannya lain waktu.
+Saat ini akan saya masukkan ke daftar riset & analisis saya terlebih dahulu.
+Lebih baik yang saya lakukan adalah membetulkan fungsi delete terlebih dahulu.
+
+export default ({ children }) => <PostLayout meta={meta}>{children}</PostLayout
+
+>
