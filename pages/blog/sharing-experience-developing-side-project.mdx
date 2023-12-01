@@ -1,0 +1,135 @@
+import PostLayout from '@/components/layouts/post-layout';
+
+export const meta = {
+  author: 'Andhika',
+  link: 'sharing-experience-developing-side-project',
+  title: 'Sharing Experience Developing Side Project',
+  slug: 'Heart that is passionate to keep creating something.',
+  isPublished: true,
+  publishedOn: 'December 01, 2023',
+  publishedDate: '2023/12/01',
+  category: 'Learn',
+};
+
+Kali ini saya ingin sharing pengalaman side project yang saya kerjakan mulai November bulan lalu.
+Ceritanya saya ingin membuat mobile app dengan fungsi pencatatan keuangan ya,
+sebenarnya sudah banyak ya aplikasi pencatatan keuangan yang ada di play store/app store.
+Tetapi disini ada beberapa hal yang membuat saya benar benar mendevelop aplikasi ini.
+
+Oh ya sebelumnya saya ucapkan terima kasih kepada PT. Arkamaya.
+Dimana di bulan Mei lalu telah mempekerjaan saya sebagai full stack web developer.
+Saya juga banyak berterima kasih juga telah diijinkan untuk bekerja di rumah pada bulan Agustus.
+Dan dengan terpaksa saya harus melepas posisi tersebut, terima kasih banyak Pak Irfan, Pak Achmad & Pak Ade :)
+
+Project ini saya gasken karena
+
+1. Finansial reporting & budgeting buat personal atau multi personal.
+2. Aplikasi mobile yang serupa fungsinya ada banyak,
+   cuma yang sesuai dengan kebutuhan sampai budgeting multi personal saya belum menemukannya.
+3. Ingin mempelajari 2 bahasa pemrograman yang lagi ingin inginnya dipelajari.
+4. Proses mencari lowongan sampai hired pasti perlu mencari & menunggu, jadi selagi menunggu sekalian saya kerjakan.
+
+Sebagai informasi aplikasi saya bagi menjadi 2 aplikasi, aplikasi API & aplikasi Mobile.
+Detail aplikasi saya taruh di github,
+
+## Aplikasi API
+
+[https://github.com/okumaru/rust-api](https://github.com/okumaru/rust-api)
+
+## Aplikasi Mobile
+
+[https://github.com/okumaru/mobile-app-budget](https://github.com/okumaru/mobile-app-budget)
+
+Secara singkat,
+Aplikasi API menggunakan bahasa pemrograman Rust,
+dan terinstall beberapa library Hyper,
+Sqlx dan beberapa library lainnya.
+Untuk Aplikasi Mobile menggunakan Kotlin,
+Jetpack Compose dan beberapa library lainnya.
+Untuk detail teknis akan saya pisah di blog post lainnya.
+Disclaimer juga saya orang yang baru belajar 2 bahasa pemrograman ini ya,
+jadi mohon maaf jika struktur aplikasi yang belum sempurna.
+
+Ada beberapa hal yang ingin saya ceritakan dari pengalaman membuat kedua aplikasi tersebut.
+
+# 1. Developing API
+
+Bahasa pemrograman Rust sebenarnya sudah saya pelajari dari tahun kemarin,
+dan sudah ada 2 project lainnya yang menggunakan bahasa pemrograman Rust,
+penggunaan tidak begitu komplek dan hanya penyimpanan data cuma di file JSON.
+
+Untuk develop API ini saya lebih melihat referensi code dari library Tokio Hyper & Sqlx.
+Karena experience untuk menuliskan code dari bahasa pemrograman tersebut saya kurang
+dan saya tidak 100% memahami teori dari bahasa pemrogramannya.
+Selain itu library tersebut juga sudah menyediakan beberapa contoh aplikasi yang di local saya berhasil dijalankan.
+
+Kalau boleh jujur, saya melakukan beberapa kali penyesuaian skeleton di API ini.
+yang saya lakukan untuk mengerjakan aplikasi API ini,
+
+1. Start project dengan include framework Hyper.
+2. Develop handler agar request path & request method sesuai dengan domainnya.
+   misalnya /accounts kusus untuk account, /transaksi kusus untuk transaksi dan sebagainya.
+3. Restruktur skeleton,
+   agar request method GET bisa multiple kondisi.
+4. Menambahkan library Sqlx agar CRUD bisa terhubung dengan database.
+5. Restruktur skeleton lagi,
+   agar Sqlx bisa menerapkan rollback transaksi ketika ada kegagalan transaksi di salah satu query ke database.
+
+Yang paling sulit ketika develop aplikasi ini adalah
+
+1. Anda tidak bisa senaknya mendefinisikan variable senaknya,
+   every type of variable di bahasa pemrograman ini is matter.
+2. Penerapan transaksi di Sqlx tidak mudah.
+   karena fitur tidak include dengan librarynya,
+   ada solusinya tetapi saya temukan di forum.
+   Di aplikasi ini sudah include transaksi cuma untested.
+3. Referensi terbatas, contoh penggunaan code di dokumentasi tidak banyak.
+
+Dibalik kesulitan itu,
+sebenarnya bahasa pemrograman ini lebih saya sukai daripada PHP & Javascript.
+Karena saking strict-nya semakin saya ingin tau cara membuka kunci pintu tersebut.
+
+# 2. Developing Mobile
+
+Sebenarnya saya belum pernah menggunakan Kotlin bahkan Java.
+Tetapi saya yakin saya bisa menyelesaikan side project ini.
+Yang saya memulainya dengan,
+
+1. Membuat project awal dari android studio dan beberapa refrensi dari android developer.
+2. Selanjutnya mempelajari jetpack compose beserta dengan course dari android developer dan
+   saya cuma menyelesaikan 3 course dari android developer terkait jetpack compose.
+3. Dan langsung mengerjakan layout layout dengan membayangkan seharusnya seperti apa.
+4. Menambahkan beberapa library milik Ktor dan membuat request ke API dengan menaruh request di ViewModel.
+5. Menambahkan beberapa library untuk Room & Ksp.
+
+Kesulitan yang saya alami ketika develop mobile ini adalah,
+
+1. ternyata untuk implementasi request API belum saya pelajari,
+   dari sana saya menemukan ViewModel.
+   Dan hampir sama dengan Rust, Kotlin ada library-nya sendiri untuk encode/decode JSON data menjadi Object.
+   Dan juga disini saya belum mengetahui & bagaimana menerapkan request pagination ke lazyload.
+2. Karena setiap data di provide dengan request ke API,
+   tetapi konfigurasi request API ingin saya simpan di room database.
+   Dan juga saya lihat untuk request ke room database membutuhkan context,
+   sedangkan beberapa composable component juga request ke API melalui ViewModel.
+   Akhirnya saya ambil solusi data konfigurasi di provide Base Activity,
+   Activity lainnya saya extends ke Base Activity dan data untuk composable component saya provide oleh Activity.
+3. Ketika upload ke play store / app store membutuhkan DUNS,
+   yang sampai sekarang belum mendapatkan kabar dari hasil request registrasi DUNS.
+4. Preview untuk composable component memakan resource yang tinggi,
+   akhirnya saya tidak implementasi Preview untuk composable component.
+
+Menurut saya hasil develop aplikasi mobile ini, cukup menarik,
+mudah dipelajari kalau menggunakan jetpack compose dari pada menggunakan resource layout.
+Tetapi secara hasil output saya kurang tau, karena proses upload ke play store juga masih terkendala.
+
+Mungkin ini dulu yang bisa saya share di Linkedin,
+untuk lebih detailnya akan saya share di blog website saya.
+Dan juga sharing ini bukan untuk sombong ya,
+justru hasil 2 aplikasi ini belum sempurna dan ingin saya kembangkan lagi.
+Tapi untuk minggu depan saya ingin fokus mencari lowongan pekerjaan terlebih dahulu.
+Untuk pesan singkat untuk builder lainnya, jangan berhenti untuk belajar & berkreasi.
+
+export default ({ children }) => <PostLayout meta={meta}>{children}</PostLayout
+
+>
