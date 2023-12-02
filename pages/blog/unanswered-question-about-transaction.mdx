@@ -22,7 +22,7 @@ Sedikit cerita ketika develop project budgeting.
 
 Di aplikasi API aku coba terapkan rollback transaksi,
 dimana fungsinya ketika memiliki beberapa transaksi ke database,
-dan salah satu transaksi mengalami kegagalan, semua transaksi tersebut tidak akan digagalkan(rollback)
+dan salah satu transaksi mengalami kegagalan, semua transaksi tersebut tidak akan digagalkan(rollback).
 
 Setau saya fitur sudah include di berbagai library yang digunakan untuk mengelola database.
 Tetapi saya tidak tau apakah fitur ini sudah banyak diterapkan di berbagai macam aplikasi?
@@ -65,9 +65,9 @@ Oleh karena itu saya coba cari tau kenapa delete account gagal dilakukan ketika 
 Debug di mobile yang saya lakukan adalah
 
 1. memastikan request dilakukan ke API.
-2. memastikan endpoint sudah betul mengarah ke API yang sudah saya buat.
-3. memastikan parameter yang dikirimkan juga sudah sesuai.
-   Dan dari hasil debug tersebut tidak menemukan kesalahan & semuanya sudah betul.
+2. ~~memastikan endpoint sudah betul mengarah ke API yang sudah saya buat.~~
+3. ~~memastikan parameter yang dikirimkan juga sudah sesuai.
+   Dan dari hasil debug tersebut tidak menemukan kesalahan & semuanya sudah betul.~~
 
 Akhirnya baru saya cari log yang ada di API, dan log tersebut tertulisakan seperti berikut.
 
@@ -100,14 +100,41 @@ pub fn query_detail_account<'a>(
 
 <br />
 
-Tetapi saya coba cek di database, data dengan account id yang dikirimkan oleh mobile sudah betul.
-Dari situ saya menyimpulkan, ada kemungkinan fungsi rollback transaksi berhasil dilakukan.
+Tetapi saya coba cek di database, data dengan account id yang dikirimkan oleh mobile **seharusnya** sudah betul.
+Dari situ saya mengasumsikan, ada kemungkinan fungsi rollback transaksi berhasil dilakukan.
 Karena sebelum melakukan transaksi menghapus data dari database, API melakukan transaksi dengan mengambil data dari database.
 Tetapi anehnya kenapa rollback transaksi baru bisa digunakan ketika request dikirimkan menggunakan mobile?
 
-Untuk menjawab pertanyaan tersebut mengkin akan saya cari jawabannya lain waktu.
-Saat ini akan saya masukkan ke daftar riset & analisis saya terlebih dahulu.
-Lebih baik yang saya lakukan adalah membetulkan fungsi delete terlebih dahulu.
+Setelah mengasumsikan penyebabnya dikarenakan request mengambil data terlebih dahulu,
+lalu baru melakukan delete data, sedangkan disana ada rollback transaction.
+Akhirnya yang saya lakukan adalah merubah response data API.
+
+Awalnya,
+
+- Ketika sukses menghapus data, meresponse data yang telah dihapus
+- Response code dari request API adalah 200 Ok
+- Ketika gagal, akan meresponse 500 Internal Server Error, sehingga mobile akan menganggap request http akan gagal.
+
+Menjadi,
+
+- Ketika sukses menghapus data, meresponse data boolean(artinya cuma `true` saja).
+- Response code tetap sama menjadi 200 Ok
+- Ketika gagal, akan meresponse 500 Internal Server Error, sehingga mobile akan menganggap request http akan gagal.
+
+Setelah penyesuaian selesai dilakukan & saya lakukan deploy ke server.
+Akhirnya yang terjadi adalah tetap sama :)
+Di mobile tetap mengalami error, dari sana saya melakukan debug lebih dalam lagi ke aplikasi mobile dengan melakukan,
+
+2. memastikan endpoint sudah betul mengarah ke API yang sudah saya buat.
+3. memastikan parameter yang dikirimkan juga sudah sesuai.
+   Dan dari hasil debug tersebut tidak menemukan kesalahan & semuanya sudah betul.
+
+Dua step ini belum saya lakukan ketika debug aplikasi mobile.
+Dan ternyata penyebabnya adalah endpoint tidak mengirimkan ID dari account.
+Sehingga request mengambil data ke database di anggap `RowNotFound`
+
+Yup betul, sampai saat ini saya belum menemukan bagaimana cara untuk melakukan test rollback transaction.
+Semoga saja dalam jangka waktu dekat ini saya bisa melakukan test rollback transaction pada aplikasi API ini.
 
 export default ({ children }) => (
   <PostLayout meta={meta}>{children}</PostLayout>
